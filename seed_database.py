@@ -39,7 +39,7 @@ for movie in movie_data:
     film = crud.create_movie(title, overview, release_date, poster_path)
     movies_in_db.append(film)
 for n in range(10):
-    email = f'user{n}@test.com'  # Voila! A unique email!
+    email = f'user{n + 1}@test.com'  # Voila! A unique email!
     password = 'test'
     # create 10 users
     user = crud.create_user(email, password)
