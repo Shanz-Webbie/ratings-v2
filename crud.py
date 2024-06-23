@@ -5,10 +5,9 @@ from model import db, User, Movie, Rating, connect_to_db
 
 def create_user(email, password):
     """Create and return a new user."""
-
     user = User(email=email, password=password)
-
     return user
+
 
 def get_user():
     """Get all users"""
@@ -17,6 +16,10 @@ def get_user():
 def get_user_by_id(user_id):
     """Get user by id."""
     return User.query.get(user_id)
+
+def get_user_by_email(email):
+    """Return user by email."""
+    return User.query.filter(User.email == email).first()
 
 def create_movie(title, overview, release_date, poster_path):
     """Create and return a new movie."""
@@ -41,6 +44,15 @@ def create_rating(user, movie, score):
                    movie=movie,
                    score=score)
     return rating
+
+def update_rating(rating_id, score):
+    """Update existing rating."""
+    rating = Rating.query.get(rating_id)
+    rating.score = score
+
+def show_rating():
+    """Get rating"""
+    return Rating.query.mean().all()
 
 if __name__ == '__main__':
     from server import app
